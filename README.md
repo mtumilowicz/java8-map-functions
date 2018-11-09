@@ -38,6 +38,7 @@ to the compareTo method (the method returns 0).
 
 # summary
 ## comparing
+In `Map.Entry`:
 * `public static <K extends Comparable<? super K>, V> Comparator<Map.Entry<K, V>> comparingByKey()`
 * `public static <K, V extends Comparable<? super V>> Comparator<Map.Entry<K, V>> comparingByValue()`
 * `public static <K, V> Comparator<Map.Entry<K, V>> comparingByKey(Comparator<? super K> cmp)`
