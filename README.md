@@ -46,9 +46,9 @@ In `Map.Entry`:
 
 ## processing
 * `default void forEach(BiConsumer<? super K, ? super V> action)`
+* `default V getOrDefault(Object key, V defaultValue)`
 
 # modifying
-* `default V getOrDefault(Object key, V defaultValue)`
 * `default V putIfAbsent(K key, V value)`
 * `default boolean remove(Object key, Object value)`
 * `default void replaceAll(BiFunction<? super K, ? super V, ? extends V> function)`
@@ -84,3 +84,16 @@ We provide tests for above mentioned methods.
         ```
         customerMap.forEach((key, value) -> System.out.println(key + ": " + value));
         ```
+    * get customer (id = 1) from map or default to EMPTY customer
+        ```
+        @Value
+        class Customer {
+            public static final Customer EMPTY = new Customer(0);
+            
+            Integer id;
+        }
+        ```
+        ```
+        customerMap.getOrDefault(1, Customer.EMPTY);
+        ```
+1. modifying
