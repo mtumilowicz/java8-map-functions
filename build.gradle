@@ -6,10 +6,7 @@ plugins {
 group 'java8-map-functions'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 11
-
-lombok {
-}
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
