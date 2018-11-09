@@ -88,7 +88,15 @@ entry for the specified key only if currently mapped to the specified value.
 * `default V replace(K key, V value)` - Replaces the entry for the 
 specified key only if map contains key.
     
-* `default V computeIfPresent(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)`
+* `default V computeIfPresent(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)` - 
+If the value for the specified key is present and non-null, attempts to
+compute a new mapping given the key and its current mapped value.
+
+    **If the function returns null, the mapping is removed.**
+    
+    **returns** the new value associated with the specified key, or 
+    null if none
+
 * `default V compute(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)`
 * `default V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)`
 
@@ -153,4 +161,8 @@ We provide tests for above mentioned methods.
     * replace value for given key (map has to contain that key)
         ```
         map.replace(1, "newValue");
+        ```
+    * increase a counter
+        ```
+        map.computeIfPresent(1, (k, v) -> ++v);
         ```

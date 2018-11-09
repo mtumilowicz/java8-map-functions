@@ -3,6 +3,7 @@ import org.junit.Test;
 import java.util.*;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -171,6 +172,45 @@ public class MapModifyingTest {
         Map<Integer, List<String>> map = new HashMap<>();
 
         map.computeIfAbsent(1, key -> null);
+
+        assertTrue(map.isEmpty());
+    }
+
+    @Test
+    public void computeIfPresent_present_nonNullValue() {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        map.put(1, 1);
+        map.computeIfPresent(1, (k, v) -> ++v);
+
+        assertThat(map.get(1), is(2));
+    }
+
+    @Test
+    public void computeIfPresent_present_nullValue() {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        map.put(1, null);
+        map.computeIfPresent(1, (k, v) -> ++v);
+
+        assertThat(map.get(1), is(nullValue()));
+    }
+
+    @Test
+    public void computeIfPresent_present_computeNul() {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        map.put(1, 1);
+        map.computeIfPresent(1, (k, v) -> null);
+
+        assertTrue(map.isEmpty());
+    }
+
+    @Test
+    public void computeIfPresent_absent() {
+        Map<Integer, Integer> map = new HashMap<>();
+        
+        map.computeIfPresent(1, (k, v) -> ++v);
 
         assertTrue(map.isEmpty());
     }
