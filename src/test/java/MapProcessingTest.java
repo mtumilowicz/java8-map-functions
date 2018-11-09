@@ -13,39 +13,33 @@ public class MapProcessingTest {
     
     @Test
     public void forEach() {
-        Customer c1 = new Customer(1);
-        Customer c2 = new Customer(2);
-        Customer c3 = new Customer(3);
+        Map<Integer, String> map = new HashMap<>();
 
-        Map<Integer, Customer> customerMap = new HashMap<>();
+        map.put(1, "1");
+        map.put(2, "2");
+        map.put(3, "3");
 
-        customerMap.put(c1.getId(), c1);
-        customerMap.put(c2.getId(), c2);
-        customerMap.put(c3.getId(), c3);
-
-        customerMap.forEach((key, value) -> System.out.println(key + ": " + value));
+        map.forEach((key, value) -> System.out.println(key + ": " + value));
     }
     
     @Test
     public void getOrDefault_found() {
-        Customer c1 = new Customer(1);
+        Map<Integer, String> map = new HashMap<>();
 
-        Map<Integer, Customer> customerMap = new HashMap<>();
+        map.put(1, "1");
 
-        customerMap.put(c1.getId(), c1);
-
-        Customer customer = customerMap.getOrDefault(1, Customer.EMPTY);
+        String str = map.getOrDefault(1, "NOT-FOUND");
         
-        assertThat(customer, is(c1));
+        assertThat(str, is("1"));
     }
 
     @Test
     public void getOrDefault_notFound() {
-        Map<Integer, Customer> customerMap = new HashMap<>();
+        Map<Integer, String> map = new HashMap<>();
         
-        Customer customer = customerMap.getOrDefault(1, Customer.EMPTY);
+        String str = map.getOrDefault(1, "NOT-FOUND");
         
-        assertThat(customer, is(Customer.EMPTY));
+        assertThat(str, is("NOT-FOUND"));
     }
     
 }

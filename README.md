@@ -49,7 +49,9 @@ In `Map.Entry`:
 * `default V getOrDefault(Object key, V defaultValue)`
 
 # modifying
-* `default V putIfAbsent(K key, V value)`
+* `default V putIfAbsent(K key, V value)`- If the specified key is 
+not already associated with a value (or is mapped to null) associates 
+it with the given value and returns null, else returns the current value.
 * `default boolean remove(Object key, Object value)`
 * `default void replaceAll(BiFunction<? super K, ? super V, ? extends V> function)`
 * `default boolean replace(K key, V oldValue, V newValue)`
@@ -82,18 +84,10 @@ We provide tests for above mentioned methods.
 1. processing - `MapProcessingTest`
     * print all entries
         ```
-        customerMap.forEach((key, value) -> System.out.println(key + ": " + value));
+        map.forEach((key, value) -> System.out.println(key + ": " + value));
         ```
-    * get customer (id = 1) from map or default to EMPTY customer
+    * get key (id = 1) from map or default to "NOT-FOUND"
         ```
-        @Value
-        class Customer {
-            public static final Customer EMPTY = new Customer(0);
-            
-            Integer id;
-        }
-        ```
-        ```
-        customerMap.getOrDefault(1, Customer.EMPTY);
+        map.getOrDefault(1, "NOT-FOUND");
         ```
 1. modifying
