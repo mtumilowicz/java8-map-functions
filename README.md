@@ -148,7 +148,7 @@ We provide tests for above mentioned methods.
         ```
         map.getOrDefault(1, "NOT-FOUND");
         ```
-1. modifying
+1. modifying - `MapModifyingTest`
     * putIfAbsent - good way of initializing entries in map
         ```
         Map<String, Integer> counter = new HashMap<>();
