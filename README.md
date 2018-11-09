@@ -97,7 +97,16 @@ compute a new mapping given the key and its current mapped value.
     **returns** the new value associated with the specified key, or 
     null if none
 
-* `default V compute(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)`
+* `default V compute(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)` -
+Attempts to compute a mapping for the specified key and its current
+mapped value (or null if there is no current mapping).
+
+    **If the function returns null, the mapping is removed (or remains 
+    absent if initially absent).**
+    
+    **returns** the new value associated with the specified key, or 
+    null if none
+    
 * `default V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)`
 
 # project description
