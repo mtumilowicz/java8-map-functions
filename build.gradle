@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'io.franzbecker.gradle-lombok' version '1.14'
 }
 
 group 'java8-map-functions'
@@ -7,10 +8,14 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 11
 
+lombok {
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    compile group: 'com.google.guava', name: 'guava', version: '27.0-jre'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
