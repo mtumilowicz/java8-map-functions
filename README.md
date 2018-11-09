@@ -6,24 +6,20 @@ _Reference_: https://dzone.com/articles/java-8-hashmaps-keys-and-the-comparable-
 _Reference_: https://yermilov.github.io/blog/2017/02/24/tiebreaker-regarding-java-hashmap-treenode-and-tiebreakorder/
 
 # preface
-Basically when a bucket becomes too big (currently: `TREEIFY_THRESHOLD = 8`), 
-`HashMap` dynamically replaces it with an ad-hoc implementation of tree 
-map. This way rather than having pessimistic `O(n)` we get much better 
-`O(logn)`. How does it work? Well, previously entries with conflicting 
-keys were simply appended to linked list, which later had to be traversed. 
-Now `HashMap` promotes list into binary tree, using hash code as a 
-branching variable. If two hashes are different but ended up in the 
+When a bucket exceeds threshold (`TREEIFY_THRESHOLD = 8`), 
+`HashMap` dynamically replaces it a tree map. Instead of having 
+pessimistic `O(n)` we get `O(logn)`. Previously entries with conflicting 
+keys were appended to linked list. Now `HashMap` uses binary tree (hash code as a 
+branching variable). If two hashes are different but ended up in the 
 same bucket, one is considered bigger and goes to the right. If hashes 
 are equal (as in our case), `HashMap` hopes that the keys are `Comparable`, 
 so that it can establish some order. This is not a requirement of 
-`HashMap` keys, but apparently a good practice. If keys are not 
-comparable, don't expect any performance improvements in case of heavy 
-hash collisions.
+`HashMap` keys, but apparently a good practice.
 
 The tree implementation inside the `HashMap` is a `Red-Black` tree, which 
 means it will always be balanced.
 
-When the `HashMap` implementation tries to find the location of a new 
+When the `HashMap` implementation tries to find the location of a 
 entry in the tree, 
 first it checks whether the current and the new values are easily 
 comparable (`Comparable` interface) or not. In the latter case, it has 
