@@ -5,5 +5,7 @@ import lombok.Value;
  */
 @Value
 class Customer {
+    public static final Customer EMPTY = new Customer(0);
+    
     Integer id;
 }
