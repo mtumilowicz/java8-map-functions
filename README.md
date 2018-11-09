@@ -106,3 +106,14 @@ We provide tests for above mentioned methods.
         
         counter.putIfAbsent("11-u", 0);
         ```
+    * we want to remove entry, but only when key is associated with
+    specific value
+        ```
+        map.remove(key, value)
+        ```
+    * increase all counters
+        ```
+        Map<String, Integer> counter = new HashMap<>();
+        
+        counter.replaceAll((k, v) -> ++v)     
+        ```
