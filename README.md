@@ -46,12 +46,12 @@ In `Map.Entry`:
 
 ## processing
 * `default void forEach(BiConsumer<? super K, ? super V> action)`
-* `default void replaceAll(BiFunction<? super K, ? super V, ? extends V> function)`
 
 # modifying
 * `default V getOrDefault(Object key, V defaultValue)`
 * `default V putIfAbsent(K key, V value)`
 * `default boolean remove(Object key, Object value)`
+* `default void replaceAll(BiFunction<? super K, ? super V, ? extends V> function)`
 * `default boolean replace(K key, V oldValue, V newValue)`
 * `default V replace(K key, V value)`
 * `default V computeIfAbsent(K key, Function<? super K, ? extends V> mappingFunction)`
@@ -62,7 +62,7 @@ In `Map.Entry`:
 # project description
 We provide tests for above mentioned methods.
 
-1. comparing
+1. comparing - `MapComparingTest`
     * sort entry set stream by keys
         ```
         stream.sorted(Map.Entry.comparingByKey())
@@ -79,4 +79,8 @@ We provide tests for above mentioned methods.
         ```
         .sorted(Map.Entry.comparingByValue(Comparator.<Person>comparingInt(p -> p.getHobbies().size()).reversed()))
         ```
-1. processing
+1. processing - `MapProcessingTest`
+    * print all entries
+        ```
+        customerMap.forEach((key, value) -> System.out.println(key + ": " + value));
+        ```
