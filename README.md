@@ -52,6 +52,9 @@ In `Map.Entry`:
 * `default V putIfAbsent(K key, V value)`- If the specified key is 
 not already associated with a value (or is mapped to null) associates 
 it with the given value and returns null, else returns the current value.
+
+    _Remark_: `map.putIfAbsent(1, null);` is OK
+    
 * `default boolean remove(Object key, Object value)`
 * `default void replaceAll(BiFunction<? super K, ? super V, ? extends V> function)`
 * `default boolean replace(K key, V oldValue, V newValue)`
@@ -91,3 +94,9 @@ We provide tests for above mentioned methods.
         map.getOrDefault(1, "NOT-FOUND");
         ```
 1. modifying
+    * putIfAbsent - good way of initializing entries in map
+        ```
+        Map<String, Integer> counter = new HashMap<>();
+        
+        counter.putIfAbsent("11-u", 0);
+        ```
