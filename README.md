@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/mtumilowicz/java8-map-functions.svg?branch=master)](https://travis-ci.com/mtumilowicz/java8-map-functions)
+
 # java8-map-functions
 Overview of Java 8 additions to Map interface.
 
@@ -53,8 +55,7 @@ it with the given value and returns null, else returns the current value.
     **returns** the previous value associated with the specified key, or
     null if there was no mapping for the key.
 
-    **Remark**: will put the value if the key is absent, even if the 
-    value is null.
+    **Remark**: putIfAbsent(1, null) will add an entry (supposing 1 is absent)
     
 * `default V computeIfAbsent(K key, Function<? super K, ? extends V> mappingFunction)` - 
 If the specified key is not already associated with a value (or is mapped
@@ -64,13 +65,13 @@ and enters it into this map unless null.
     **returns** the current (existing or computed) value associated with 
     the specified key, or null if the computed value is null
     
-    **Remark**: will put the null value even if the key is absent
+    **Remark**: putIfAbsent(1, null) will NOT add an entry (supposing 1 is absent)
 
 * `putIfAbsent` vs `computeIfAbsent`: [stackoverflow differences](https://stackoverflow.com/a/48184207)
     * different returns,
     * laziness of `computeIfAbsent` - crucial while constructing expensive
     objects, for example `new ArrayList<>()`,
-    * different approach to `null`
+    * different approach to `null` values (discussed above)
 
 * `default boolean remove(Object key, Object value)` - Removes the entry 
 for the specified key only if it is currently mapped to the specified value.
