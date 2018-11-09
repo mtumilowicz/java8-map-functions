@@ -63,8 +63,10 @@ Replaces each entry's value with the result of invoking the given
 function on that entry until all entries have been processed or the
 function throws an exception
 
-* `default boolean replace(K key, V oldValue, V newValue)`
-* `default V replace(K key, V value)`
+* `default boolean replace(K key, V oldValue, V newValue)` - Replaces the 
+entry for the specified key only if currently mapped to the specified value.
+* `default V replace(K key, V value)` - Replaces the entry for the 
+specified key only if map contains key.
 * `default V computeIfAbsent(K key, Function<? super K, ? extends V> mappingFunction)`
 * `default V computeIfPresent(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)`
 * `default V compute(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)`
@@ -116,4 +118,12 @@ We provide tests for above mentioned methods.
         Map<String, Integer> counter = new HashMap<>();
         
         counter.replaceAll((k, v) -> ++v)     
+        ```
+    * replace value for given key only for specific oldValue
+        ```
+        map.replace(1, "oldValue", "newValue");
+        ```
+    * replace value for given key (map has to contain that key)
+        ```
+        map.replace(1, "newValue");
         ```

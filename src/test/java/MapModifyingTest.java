@@ -5,6 +5,7 @@ import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -78,5 +79,81 @@ public class MapModifyingTest {
         assertThat(map.get(1), is("1-updated"));
         assertThat(map.get(2), is("2-updated"));
         assertThat(map.get(3), is("3-updated"));
+    }
+    
+    @Test
+    public void replace_key_value_newValue_found() {
+        Map<Integer, String> map = new HashMap<>();
+
+        map.put(1, "old");
+        
+        map.replace(1, "old", "replaced");
+
+        assertThat(map.get(1), is("replaced"));
+    }
+
+    @Test
+    public void replace_key_value_newValue_notFound() {
+        Map<Integer, String> map = new HashMap<>();
+
+        map.put(1, "1");
+
+        map.replace(1, "2", "replaced");
+
+        assertThat(map.get(1), is("1"));
+    }
+
+    @Test
+    public void replace_key_value_newValue_oldNull() {
+        Map<Integer, String> map = new HashMap<>();
+
+        map.put(1, null);
+
+        map.replace(1, null, "replaced");
+
+        assertThat(map.get(1), is("replaced"));
+    }
+
+    @Test
+    public void replace_key_value_newValue_newNull() {
+        Map<Integer, String> map = new HashMap<>();
+
+        map.put(1, "1");
+
+        map.replace(1, "1", null);
+
+        assertThat(map.size(), is(1));
+        assertNull(map.get(1));
+    }
+    
+    @Test
+    public void replace_key_value_found() {
+        Map<Integer, String> map = new HashMap<>();
+
+        map.put(1, "1");
+
+        map.replace(1, "replaced");
+
+        assertThat(map.get(1), is("replaced"));
+    }
+
+    @Test
+    public void replace_key_value_notFound() {
+        Map<Integer, String> map = new HashMap<>();
+
+        map.replace(1, "replaced");
+
+        assertTrue(map.isEmpty());
+    }
+    
+    @Test
+    public void replace_key_value_mappedToNull() {
+        Map<Integer, String> map = new HashMap<>();
+
+        map.put(1, null);
+
+        map.replace(1, "replaced");
+
+        assertThat(map.get(1), is("replaced"));
     }
 }
