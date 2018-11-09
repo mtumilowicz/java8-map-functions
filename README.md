@@ -55,7 +55,9 @@ it with the given value and returns null, else returns the current value.
 
     _Remark_: `map.putIfAbsent(1, null);` is OK
     
-* `default boolean remove(Object key, Object value)`
+* `default boolean remove(Object key, Object value)` - Removes the entry 
+for the specified key only if it is currently mapped to the specified value.
+
 * `default void replaceAll(BiFunction<? super K, ? super V, ? extends V> function)`
 * `default boolean replace(K key, V oldValue, V newValue)`
 * `default V replace(K key, V value)`
