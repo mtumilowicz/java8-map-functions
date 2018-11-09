@@ -64,4 +64,19 @@ public class MapModifyingTest {
 
         assertTrue(map.isEmpty());
     }
+    
+    @Test
+    public void replaceAll() {
+        Map<Integer, String> map = new HashMap<>();
+
+        map.put(1, "1");
+        map.put(2, "2");
+        map.put(3, "3");
+
+        map.replaceAll((k, v) -> v + "-updated");
+
+        assertThat(map.get(1), is("1-updated"));
+        assertThat(map.get(2), is("2-updated"));
+        assertThat(map.get(3), is("3-updated"));
+    }
 }
