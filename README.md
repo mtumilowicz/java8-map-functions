@@ -1,4 +1,5 @@
 # java8-map-functions
+Overview of Java 8 additions to Map interface.
 
 _Reference_: https://www.nurkiewicz.com/2014/04/hashmap-performance-improvements-in.html  
 _Reference_: https://dzone.com/articles/java-8-hashmaps-keys-and-the-comparable-interface  
