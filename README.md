@@ -175,3 +175,8 @@ We provide tests for above mentioned methods.
         ```
         map.computeIfPresent(1, (k, v) -> ++v);
         ```
+    * increase a counter or init new for new entries
+        ```
+        map.compute(1, (k, v) -> isNull(v) ? 0 : ++v);
+        ```
+    
