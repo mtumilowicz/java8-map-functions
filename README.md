@@ -58,3 +58,25 @@ In `Map.Entry`:
 * `default V computeIfPresent(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)`
 * `default V compute(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)`
 * `default V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)`
+
+# project description
+We provide tests for above mentioned methods.
+
+1. comparing
+    * sort entry set stream by keys
+        ```
+        stream.sorted(Map.Entry.comparingByKey())
+        ```
+    * sort entry set stream by keys in reverse order
+        ```
+        stream.sorted(Map.Entry.comparingByKey((x, y) -> Integer.compare(y, x)))
+        ```
+    * sort entry set stream by values
+        ```
+        stream.sorted(Map.Entry.comparingByValue(Comparator.comparingInt(p -> p.getHobbies().size())))
+        ```
+    * sort entry set stream by values in reverse order
+        ```
+        .sorted(Map.Entry.comparingByValue(Comparator.<Person>comparingInt(p -> p.getHobbies().size()).reversed()))
+        ```
+1. processing
