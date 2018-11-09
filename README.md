@@ -107,8 +107,20 @@ mapped value (or null if there is no current mapping).
     **returns** the new value associated with the specified key, or 
     null if none
     
-* `default V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)`
+* `default V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)` -
+If the specified key is not already associated with a value or 
+is associated with null, associates it with the given non-null value.
+Otherwise, replaces the associated value with the results of the given 
+remapping function, or removes if the result is null.
 
+    **If the function returns null the mapping is removed.**
+    
+    **returns** the new value associated with the specified key, or 
+    null if no value is associated with the key
+
+* `compute` vs `merge`
+    * arguments of `BiFunction` in `compute`: (key, value)
+    * arguments of `BiFunction` in `merge`: (oldValue, value)
 # project description
 We provide tests for above mentioned methods.
 
@@ -178,5 +190,10 @@ We provide tests for above mentioned methods.
     * increase a counter or init new for new entries
         ```
         map.compute(1, (k, v) -> isNull(v) ? 0 : ++v);
+        ```
+    * initialize or update in one line - increase 
+    a counter or init new for new entries
+        ```
+        map.merge(1, 0, (oldValue, newValue) -> ++oldValue);
         ```
     

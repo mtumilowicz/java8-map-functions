@@ -253,4 +253,16 @@ public class MapModifyingTest {
         assertThat(map.get(1), is(0));
     }
     
+    @Test
+    public void merge() {
+        Map<Integer, Integer> map = new HashMap<>();
+        
+        map.merge(1, 0, (oldValue, newValue) -> ++oldValue);
+        map.merge(1, 0, (oldValue, newValue) -> ++oldValue);
+        map.merge(1, 0, (oldValue, newValue) -> ++oldValue);
+        map.merge(1, 0, (oldValue, newValue) -> ++oldValue);
+        
+        assertThat(map.get(1), is(3));
+    }
+    
 }
