@@ -53,8 +53,28 @@ In `Map.Entry`:
 not already associated with a value (or is mapped to null) associates 
 it with the given value and returns null, else returns the current value.
 
-    _Remark_: `map.putIfAbsent(1, null);` is OK
+    **returns** the previous value associated with the specified key, or
+    null if there was no mapping for the key.
+
+    **Remark**: will put the value if the key is absent, even if the 
+    value is null.
     
+* `default V computeIfAbsent(K key, Function<? super K, ? extends V> mappingFunction)` - 
+If the specified key is not already associated with a value (or is mapped
+to null), attempts to compute its value using the given mapping function 
+and enters it into this map unless null.
+
+    **returns** the current (existing or computed) value associated with 
+    the specified key, or null if the computed value is null
+    
+    **Remark**: will put the null value even if the key is absent
+
+* `putIfAbsent` vs `computeIfAbsent`: [stackoverflow differences](https://stackoverflow.com/a/48184207)
+    * different returns,
+    * laziness of `computeIfAbsent` - crucial while constructing expensive
+    objects, for example `new ArrayList<>()`,
+    * different approach to `null`
+
 * `default boolean remove(Object key, Object value)` - Removes the entry 
 for the specified key only if it is currently mapped to the specified value.
 
@@ -67,7 +87,7 @@ function throws an exception
 entry for the specified key only if currently mapped to the specified value.
 * `default V replace(K key, V value)` - Replaces the entry for the 
 specified key only if map contains key.
-* `default V computeIfAbsent(K key, Function<? super K, ? extends V> mappingFunction)`
+    
 * `default V computeIfPresent(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)`
 * `default V compute(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction)`
 * `default V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction)`
@@ -108,6 +128,13 @@ We provide tests for above mentioned methods.
         
         counter.putIfAbsent("11-u", 0);
         ```
+    * computeIfAbsent - suppose we have `Map<String, List<String>>`
+    and we want to add (1, "newValue") such that "newValue" will be
+    added to the list of string
+        ```
+        map.computeIfAbsent(1, key -> new ArrayList<>()).add("newValue1");
+        ```
+        **Note** that `new ArrayList<>()` is created lazily.
     * we want to remove entry, but only when key is associated with
     specific value
         ```

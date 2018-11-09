@@ -1,7 +1,6 @@
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -155,5 +154,24 @@ public class MapModifyingTest {
         map.replace(1, "replaced");
 
         assertThat(map.get(1), is("replaced"));
+    }
+
+    @Test
+    public void computeIfAbsent() {
+        Map<Integer, List<String>> map = new HashMap<>();
+
+        map.computeIfAbsent(1, key -> new ArrayList<>()).add("newValue1");
+        map.computeIfAbsent(1, key -> new ArrayList<>()).add("newValue2");
+
+        assertThat(map.get(1), is(Arrays.asList("newValue1", "newValue2")));
+    }
+
+    @Test
+    public void computeIfAbsent_computedNull() {
+        Map<Integer, List<String>> map = new HashMap<>();
+
+        map.computeIfAbsent(1, key -> null);
+
+        assertTrue(map.isEmpty());
     }
 }
