@@ -65,7 +65,7 @@ and enters it into this map unless null.
     **returns** the current (existing or computed) value associated with 
     the specified key, or null if the computed value is null
     
-    **Remark**: putIfAbsent(1, null) will NOT add an entry (supposing 1 is absent)
+    **Remark**: `putIfAbsent(1, null)` will NOT add an entry (supposing 1 is absent)
 
 * `putIfAbsent` vs `computeIfAbsent`: [stackoverflow differences](https://stackoverflow.com/a/48184207)
     * different returns,
@@ -80,6 +80,8 @@ for the specified key only if it is currently mapped to the specified value.
 Replaces each entry's value with the result of invoking the given 
 function on that entry until all entries have been processed or the
 function throws an exception
+
+    **Remark**: Can't change the element type. To do that - use a stream.
 
 * `default boolean replace(K key, V oldValue, V newValue)` - Replaces the 
 entry for the specified key only if currently mapped to the specified value.
