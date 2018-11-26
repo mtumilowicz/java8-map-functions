@@ -6,8 +6,7 @@ import static java.util.Objects.isNull;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by mtumilowicz on 2018-11-09.
@@ -214,6 +213,31 @@ public class MapModifyingTest {
         map.computeIfPresent(1, (k, v) -> ++v);
 
         assertTrue(map.isEmpty());
+    }
+    
+    @Test
+    public void computeIfPresent_multimap() {
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        
+        map.computeIfAbsent(1, x -> new HashSet<>()).add(1);
+        map.get(1).add(2);
+        map.get(1).add(3);
+        map.get(1).add(4);
+        
+        map.computeIfPresent(1 , (key, set) -> set.remove(4) && set.isEmpty() ? null : set);
+        
+        assertThat(map.get(1), is(new HashSet<>(Arrays.asList(1, 2, 3))));
+    }
+
+    @Test
+    public void computeIfPresent_multimap_removeEntry() {
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+
+        map.computeIfAbsent(1, x -> new HashSet<>()).add(1);
+
+        map.computeIfPresent(1 , (key, set) -> set.remove(1) && set.isEmpty() ? null : set);
+
+        assertFalse(map.containsKey(1));
     }
 
     @Test
