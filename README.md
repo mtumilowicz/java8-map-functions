@@ -188,6 +188,11 @@ We provide tests for above mentioned methods.
         ```
         map.computeIfPresent(1, (k, v) -> ++v);
         ```
+    * multimap: Map<Integer, Set<Integer>> - remove value
+    from set and if set is empty - remove whole entry
+        ```
+        map.computeIfPresent(key , (key, set) -> set.remove(valueToRemove) && set.isEmpty() ? null : set);
+        ```
     * increase a counter or init new for new entries
         ```
         map.compute(1, (k, v) -> isNull(v) ? 0 : ++v);
