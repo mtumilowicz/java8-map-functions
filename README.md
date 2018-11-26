@@ -81,7 +81,8 @@ Replaces each entry's value with the result of invoking the given
 function on that entry until all entries have been processed or the
 function throws an exception
 
-    **Remark**: Can't change the element type. To do that - use a stream.
+    **Remark**: Can't change the element type. To do that - use a stream and
+    collect to the new structure.
 
 * `default boolean replace(K key, V oldValue, V newValue)` - Replaces the 
 entry for the specified key only if currently mapped to the specified value.
